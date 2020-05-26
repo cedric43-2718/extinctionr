@@ -76,9 +76,8 @@ class StoryIndexPage(Page, Orderable):
         
         context = super().get_context(request)
         
-        stories = StoryPage.objects.live() #child_of(self).live()
+        stories = StoryPage.objects.live()
         stories = stories.order_by('-date')
-        stories = stories.filter(categories__in=list(self.categories.all())).distinct()
         author = request.GET.get('author', '')
         if author:
             # A bit wonky, but if using author filter we serve all content types,
